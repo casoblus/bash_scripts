@@ -1,7 +1,10 @@
 #!/bin/bash
 
-set -euxo pipefail
+# Se ejecuta en el directorio actual
+# Reduce a 1920 la dimensión mayor de la imagen
+# Respeta la relación de aspecto
 
+set -euxo pipefail
 
 function convertirjpeg () {
 	if [ ! -d jpegAlternatives ];
@@ -9,7 +12,7 @@ function convertirjpeg () {
 		mkdir jpegAlternatives
 	fi
 
-	# Convierte a jpeg en la carpeta alternativa.
+	# Convierte png a jpeg en la carpeta alternativa.
 	convert $1 jpegAlternatives/$(identify -format "%t" $1).jpeg
 }
 
@@ -21,6 +24,7 @@ then
 	exit 1
 fi
 
+# Comprueba el número de argumentos
 if [[ $# > 2 ]]; then
 	echo Demasiados argumentos
 	exit 2
@@ -42,6 +46,8 @@ case $# in
 esac
 
 cd $directory
+
+# Crea un directorio para las imágenes optimizadas
 
 if [ ! -d "optimizedImages" ]; 
 then
