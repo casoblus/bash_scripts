@@ -1,1 +1,3 @@
-# bash_scripts
+# Bash Scripts
+
+Algunos scripts bash.
